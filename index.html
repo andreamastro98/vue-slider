@@ -29,7 +29,10 @@
                 <div class="thumbs" @mouseover="stopScroll" @mouseleave="autoScroll">
                     <div class="prev" @click="prev"></div>
                     <div class="next" @click="next"></div>
-                    <div v-for="(element,index) in slides" v-bind:class="( currentActive == index) ? ' thumb active' : 'thumb'">
+
+                    <div v-for="(element,index) in slides" :key="index" 
+                    v-bind:class="( currentActive == index) ? ' thumb active' : 'thumb'">
+                    
                         <img v-bind:src="element.image" v-bind:alt="element.title" @click="changeImg(index)">
                     </div>
                 </div>

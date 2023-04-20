@@ -4,8 +4,8 @@ const { createApp } = Vue
     data() {
       return {
         //variabili vue 3
-        currentActive: 0,
-        autoscroll: null,
+        currentActive: 0, //settiamo currentActive di default a 0
+        autoscroll: null, ////settiamo autoscroll di default a 0
 
         slides:[
                 {
@@ -33,36 +33,44 @@ const { createApp } = Vue
       }
     },
     created(){
+        //impostiamo lo scroll automatico delle thumb  all'apertura della page
         this.autoScroll()
     },
     methods: {
         //funzioni vue 3
         prev(){
+            //alla pressione del prev facciamo -1 al currentActive
             this.currentActive--
+            //se currentActive diventa <0 quest'ultimo diventa il numero index dell'ultimo oggetto dell'array
             if( this.currentActive < 0){
                 this.currentActive = this.slides.length - 1
             }
         },
         
         next(){
+            //alla pressione del next facciamo +1 al currentActive
             this.currentActive++
+            //se currentActive diventa > dell'ultimo oggetto dell'array quest'ultimo diventa 0 
             if( this.currentActive > this.slides.length -1){
                 this.currentActive = 0            
             }
         },
 
         changeImg(i){
+            //alla pressione della singola thumb il currentActive diventa l'index dell'immagine cliccata
             this.currentActive = i
         },
 
         autoScroll(){
+            //settiamo l'autoscroll delle thumb a 3 secondi
             this.autoscroll = setInterval(() => {
                 this.next()
             }, 3000);
         },
 
         stopScroll(){
-            clearInterval( this.autoScroll )
+            //stoppiamo l'autoscroll automatico
+            clearInterval( this.autoscroll )
             this.autoscroll = null
         }        
     }
